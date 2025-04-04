@@ -1,0 +1,334 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+body {
+    display: flex;
+    flex-direction: column; /*maya*/
+    
+    min-height: 100vh;
+    background: url('wp11142892-watching-movie-wallpapers.jpg') no-repeat center center/cover;
+    background-color: rgba(31, 42, 59, 0.5);
+    background-blend-mode: darken;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 40px 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 99;
+}
+
+.screenflix {
+    color: #fff;
+    font-size: 1.8em;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.navigation {
+    display: flex;
+    align-items: center;
+}
+
+.nav-link {
+    font-size: 1.1em;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    margin-left: 40px;
+    position: relative;
+}
+
+.nav-link.active,
+.nav-link:hover {
+    color: #1a76e0;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 100%;
+    height: 3px;
+    background: rgb(26, 118, 224);
+    border-radius: 6px;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.5s ease;
+}
+
+.nav-link:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+.logoutBtn {
+    padding: 10px 20px;
+    background-color: transparent;
+    border: 2px solid #fff;
+    color: #fff;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 700;
+    margin-left: 40px;
+    transition: 0.5s ease;
+}
+
+.logoutBtn:hover {
+    background-color: rgb(26, 118, 224);
+    color: #fff;
+}
+
+.content {
+    padding: 100px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    min-height: 100vh;
+}
+
+.home-content {
+    background: transparent;
+    border-radius: 10px;
+    padding: 40px;
+    max-width: 600px;
+    width: 100%;
+    box-shadow: 0 0 30px rgb(37, 53, 204);
+    text-align: center;
+    backdrop-filter: blur(20px);
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 25px;
+
+}
+
+.home-content h1 {
+    margin-bottom: 20px;
+    font-size: 2.5em;
+    color: #1a76e0;
+}
+
+.home-content p {
+    margin-bottom: 30px;
+    font-size: 1.2em;
+    color: white;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    font-size: 1em;
+    color: white;
+    margin-bottom: 8px;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 1em;
+    background-color: #f9f9f9;
+}
+
+.form-group input[type="file"] {
+    padding: 5px;
+}
+
+.form-group textarea {
+    resize: none;
+    height: 120px;
+}
+
+form button {
+    background-color: #1a76e0;
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 1.2em;
+    transition: background-color 0.3s;
+    margin-top: 20px;
+}
+
+form button:hover {
+    background-color: #155dba;
+}
+/* General Styles for the Manage Page */
+main {
+    padding: 10%;
+    color: white;
+    display: list-item;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.movie-list {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0;
+    width: 80%;
+    display: list-item;
+}
+
+.movie-item {
+    display: flex;
+    align-items: center;
+    background: transparent;
+    box-shadow: 0 0 30px rgb(37, 53, 204);
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 25px;
+    backdrop-filter: blur(20px);
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+}
+
+.movie-thumbnail {
+    width: 120px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-right: 20px;
+}
+
+.movie-info {
+    flex: 1;
+}
+
+.movie-info h3 {
+    margin-bottom: 5px;
+    font-size: 18px;
+    color: white;
+}
+
+.movie-info p {
+    color: #666;
+}
+
+.movie-actions {
+    display: flex;
+    gap: 10px; /* Space between buttons */
+}
+
+.movie-actions button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.movie-actions button.btn-update {
+    background-color: #28a745;
+}
+
+.movie-actions button.btn-delete {
+    background-color: #dc3545;
+}
+
+.movie-actions button:hover {
+    background-color: #0056b3;
+}
+
+.movie-actions button.btn-update:hover {
+    background-color: #218838;
+}
+
+.movie-actions button.btn-delete:hover {
+    background-color: #c82333;
+}
+/* Profile Page Styles */
+.profile-container {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: transparent;
+    box-shadow: 0 0 30px rgb(37, 53, 204);
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 25px;
+    backdrop-filter: blur(20px);
+    max-width: 800px;
+}
+
+.profile-header {
+    text-align: center;
+}
+
+.profile-pic-wrapper {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    margin-bottom: 20px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 4px solid #1a76d2;
+}
+
+.profile-pic {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profile-header h1 {
+    margin: 0;
+    font-size: 2em;
+    color: white;
+}
+
+.profile-email {
+    color: #666;
+    font-size: 1.2em;
+    margin-top: 5px;
+}
+
+.profile-info {
+    margin-top: 20px;
+    text-align: left;
+    width: 100%;
+}
+
+.profile-info h2 {
+    margin-bottom: 15px;
+    font-size: 1.5em;
+    color: #1a76d2;
+}
+
+.profile-info ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.profile-info li {
+    margin-bottom: 10px;
+    font-size: 1.1em;
+}
+
+.profile-info strong {
+    color: #666;
+}

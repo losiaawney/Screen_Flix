@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Movies</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h2 class="screenflix">Upload Movies</h2>
+        <nav class="navigation">
+            <a href="main.html" class="nav-link active">Home</a>
+            <a href="index.html" class="nav-link active">AdminPage</a>
+            <a href="manage.html" class="nav-link">Manage</a>
+            <a href="main.html"class="logoutBtn">Logout</a>
+        </nav>
+    </header>
+
+    <main class="content">
+        <div class="home-content">
+            <h1>Upload Movie</h1>
+            <p>Fill in the details below to upload a new movie.</p>
+        <form id="movie-form">
+            <div class="form-group">
+            <label for="movie-name">Movie Name:</label>
+            <input type="text" id="movie-name" name="movie-name" required>
+
+            <label for="movie-description">Movie Description:</label>
+            <textarea id="movie-description" name="movie-description" required></textarea>
+
+            <label for="photo-file">Movie Photo:</label>
+            <input type="file" id="photo-file" name="photo-file" accept="image/*" required>
+
+            <label for="movie-file">Movie File:</label>
+            <input type="file" id="movie-file" name="movie-file" accept="video/*" required>
+
+            <button type="submit">Upload Movie</button>
+         </div>
+        </form>
+    </div>
+
+    </main>
+
+    <script>
+document.getElementById('movie-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const movieName = document.getElementById('movie-name').value;
+    const movieDescription = document.getElementById('movie-description').value;
+    const photoFile = document.getElementById('photo-file').files[0];
+    const movieFile = document.getElementById('movie-file').files[0];
+
+    if (!photoFile || !movieFile) {
+        alert("Please upload both a photo and a movie.");
+        return;
+    }
+
+    const reader = new FileReader();
+    reader.onloadend = function() {
+        const base64Photo = reader.result;
+
+        const newMovie = {
+            id: Date.now(),
+            name: movieName,
+            description: movieDescription,
+            photo: base64Photo,  // Store Base64 encoded image
+            movie: URL.createObjectURL(movieFile)
+        };
+
+        let moviesArray = JSON.parse(localStorage.getItem('moviesArray')) || [];
+        moviesArray.push(newMovie);
+        localStorage.setItem('moviesArray', JSON.stringify(moviesArray));
+
+        document.getElementById('movie-form').reset();
+        alert("Movie uploaded successfully!");
+    };
+
+    reader.readAsDataURL(photoFile);  // Convert the photo to Base64
+});
+
+
+    </script>
+</body>
+</html>

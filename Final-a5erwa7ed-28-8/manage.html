@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Movies</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h2 class="screenflix">Manage Movies</h2>
+        <nav class="navigation">
+            <a href="main.html" class="nav-link">Home</a>
+            <a href="index.html" class="nav-link active">AdminPage</a>
+            <a href="#" class="nav-link active">Manage</a>
+            <a href="main.html" class="logoutBtn">Logout</a>
+        </nav>
+    </header>
+
+    <main>
+        <ul id="movie-list" class="movie-list">
+            <!-- Movies will be dynamically inserted here -->
+        </ul>
+    </main>
+
+    <script>
+        let moviesArray = {
+            "pirates": {
+      title: "Pirates of the Caribbean: Salazar's Revenge",
+      main_image:"Images/p-2.jpeg",
+      image: "Movie-Data/Pirates-of-the-Caribbean-Salazar's-Revenge/cover.jpg",
+      releaseDate: "28 August 2017",
+      trailer: "Movie-Data/Pirates-of-the-Caribbean-Salazar's-Revenge/movie.mp4", 
+      category: "Action, Adventure, Fantasy",
+      description: "Captain Jack Sparrow searches for the Trident of Poseidon to rule the sea while being pursued by old rival Captain Salazar and a crew of deadly ghosts who have escaped from the Devil's Triangle."
+  },
+  "Insidious": {
+      title: "Insidious: The Last Key",
+      main_image:"Images/p-1.jpg",
+      image: "Movie-Data/insidous-last-key/insidious.png",
+      releaseDate: "5 jaunary 2018",
+      trailer: "Movie-Data/insidous-last-key/Insidious_ The Last Key - Official International Trailer (1).mp4", 
+      category: "Horror, Mystery, Thriller",
+      description:"Parapsychologist Dr. Elise Rainier faces her most fearsome and personal haunting yet, as she is drawn back to her ghostly childhood home where the terror began."
+  },
+  "deadpool": {
+      title: "Deadpool 2",
+      main_image:"Images/p-5.jpg",
+      image: "Movie-Data/Deadpool/Deadpool.png",
+      releaseDate: "15 may 2018",
+      trailer: "Movie-Data/Deadpool/Deadpool 2 - Türkçe Dublajlı Final Fragman - 18 Mayıs 2018.mp4",  
+      category: "Action, Adventure, Comedy",
+      description:"Foul-mouthed mutant mercenary Wade Wilson (a.k.a. Deadpool) assembles a team of fellow mutant rogues to protect a young boy with abilities from the brutal, time-traveling cyborg Cable."
+  },
+  "venom": {
+      title: "Venom: Let There Be Carnage",
+      main_image:"Images/post-1.jpg",
+      image: "Movie-Data/venom/venom.png",
+      releaseDate: "2 August 2021",
+      trailer: "Movie-Data/venom/VENOM_ LET THERE BE CARNAGE - Official Trailer (HD).mp4",
+      category: "Action, Sci-Fi, Thriller",
+      description:"Eddie Brock attempts to reignite his career by interviewing serial killer Cletus Kasady, who becomes the host of the symbiote Carnage and escapes prison after a failed execution."
+  },
+  "war": {
+      title: "The Tomorrow War",
+      main_image:"Images/post-2.jpg",
+      image: "Movie-Data/the tomorrow war/The_tomorrow_war.png",
+      releaseDate: "2 July 2021",
+      trailer: "Movie-Data/venom/VENOM_ LET THERE BE CARNAGE - Official Trailer (HD).mp4",
+      category: " Adventure, Drama, Sci-Fi",
+      description:"A family man is drafted to fight in a future war where the fate of humanity relies on his ability to confront the past."
+  },
+  "jungle": {
+      title: "Jungle Cruise",
+      main_image:"Images/post-3.jpg",
+      image: "Movie-Data/jungle/jungle.png",
+      releaseDate: "30 July 2021",
+      trailer: "Movie-Data/venom/VENOM_ LET THERE BE CARNAGE - Official Trailer (HD).mp4",
+      category: "Adventure, Comedy, Fantasy",
+      description:"Based on Disneyland's theme park ride where a small riverboat takes a group of travelers through a jungle filled with dangerous animals and reptiles but with a supernatural element."
+   
+  },
+  "rumble": {
+      title: "Rumble",
+      main_image:"Images/post-8.jpg",
+      image: "Movie-Data/rumble/rumba.png",
+      releaseDate: "30 October 2013",
+      trailer: "Movie-Data/venom/VENOM_ LET THERE BE CARNAGE - Official Trailer (HD).mp4",
+      category: "Animation, Comedy, Family",
+    
+  },
+  "wanda": {
+      title: "WandaVision",
+      main_image:"Images/post-9.jpg",
+      image: "Movie-Data/wanda/wanda.png",
+      releaseDate: "15 January 2021",
+      trailer: "Movie-Data/venom/VENOM_ LET THERE BE CARNAGE - Official Trailer (HD).mp4",
+      category: "Mystery, Romance, Sci-Fi",
+      description:"Blends the style of classic sitcoms with the MCU, in which Wanda Maximoff and Vision - two super-powered beings living their ideal suburban lives - begin to suspect that everything is not as it seems."
+  },
+  "luca": {
+      title: "Luca",
+      main_image:"Images/post-11.jpg",
+      image: "Movie-Data/luca/luca.png",
+      releaseDate: "18 June 2021 ",
+      trailer: "Movie-Data/venom/VENOM_ LET THERE BE CARNAGE - Official Trailer (HD).mp4",
+      category: "Comedy, Drama, Family",
+      description:"On the Italian Riviera, an unlikely but strong friendship grows between a human being and a sea monster disguised as a human."
+  },
+  
+        };
+
+        document.addEventListener('DOMContentLoaded', function() {
+            if (window.location.pathname.endsWith('manage.html')) {
+                displayMovies();
+            }
+        });
+
+        function displayMovies() {
+            const movieList = document.getElementById('movie-list');
+            movieList.innerHTML = ''; 
+
+            for (let key in moviesArray) {
+                if (moviesArray.hasOwnProperty(key)) {
+                    const movie = moviesArray[key];
+
+                    const movieItem = document.createElement('li');
+                    movieItem.classList.add('movie-item');
+
+                    movieItem.innerHTML = `
+                        <img src="${movie.main_image}" alt="${movie.title}" class="movie-thumbnail">
+                        <div class="movie-info">
+                            <h3>${movie.title}</h3>
+                            <p>${movie.description || "No description available"}</p>
+                        </div>
+                        <div class="movie-actions">
+                            <button class="btn-update" onclick="updateMovie('${key}')">Update</button>
+                            <button class="btn-delete" onclick="deleteMovie('${key}')">Delete</button>
+                        </div>
+                    `;
+
+                    movieList.appendChild(movieItem);
+                }
+            }
+        }
+        function deleteMovie(movieKey) {
+    if (confirm(`Are you sure you want to delete the movie "${moviesArray[movieKey].title}"?`)) {
+        delete moviesArray[movieKey];
+        saveMoviesToLocalStorage();
+        displayMovies();
+        generateSliderContent();
+    }
+}
+
+function updateMovie(movieKey) {
+    const movie = moviesArray[movieKey];
+
+    if (movie) {
+        const newTitle = prompt("Enter new movie title:", movie.title);
+        const newDescription = prompt("Enter new movie description:", movie.description);
+
+        if (newTitle !== null && newDescription !== null) {
+            moviesArray[movieKey].title = newTitle;
+            moviesArray[movieKey].description = newDescription;
+            saveMoviesToLocalStorage();
+            displayMovies();
+            generateSliderContent();
+        }
+    }
+}
+
+function saveMoviesToLocalStorage() {
+    localStorage.setItem('moviesArray', JSON.stringify(moviesArray));
+}
+
+    </script>
+
+<script src="script.js"></script>
+</body>
+</html>
